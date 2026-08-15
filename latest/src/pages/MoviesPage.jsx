@@ -3,6 +3,7 @@ import { useState } from "react";
 function MoviesPage() {
   const [filterGenre, setFilterGenre] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const movies = [
     {
@@ -13,7 +14,7 @@ function MoviesPage() {
       subGenre: "Romance / Folk Drama",
       director: "Giasuddin Selim",
       rating: "⭐ 8.2/10",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/monpura.jpg",
       description:
         "একটি কালজয়ী বাংলা ট্র্যাজিক প্রেমের সিনেমা। নির্জন নিঝুম দ্বীপে নির্বাসিত সোনাই এবং পরীর অমর ও অশ্রুসজল ভালোবাসার গ্রামীণ লোকগাথা।",
       quote: "যাও পাখি বলো তারে, সে যেন ভুলে না মোরে...",
@@ -26,7 +27,7 @@ function MoviesPage() {
       subGenre: "Adventure / Coming of Age",
       director: "Morshedul Islam (Author: Muhammed Zafar Iqbal)",
       rating: "⭐ 8.5/10",
-      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/dipu-number-two.jpg",
       description:
         "মুহম্মদ জাফর ইকবালের উপন্যাস অবলম্বনে স্কুলজীবনের রোমাঞ্চকর বন্ধুত্ব, কিশোর সাহসিকতা এবং প্রাচীন মূর্তি চোরদের বিরুদ্ধে দীপু ও তার সহপাঠীদের অবিস্মরণীয় অভিযান।",
       quote: "সত্য ও সাহসের বন্ধুত্ব কখনো পরাজিত হয় না।",
@@ -39,7 +40,7 @@ function MoviesPage() {
       subGenre: "Biography / Drama / Struggle",
       director: "Vidhu Vinod Chopra",
       rating: "⭐ 8.8/10",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/12th-fail.jpg",
       description:
         "চরম দারিদ্র্য, বারবার ব্যর্থতা এবং সমাজের উপহাসকে জয় করে আইপিএস অফিসার মনোজ শর্মার অপ্রতিরোধ্য সংগ্রাম ও স্বপ্নজয়ের বাস্তব অনুপ্রেরণাদায়ী মাস্টারপিস।",
       quote: "হার মানার আগে আরও একবার চেষ্টা করো (#Restart)!",
@@ -52,7 +53,7 @@ function MoviesPage() {
       subGenre: "Comedy / Drama / Engineering",
       director: "Rajkumar Hirani",
       rating: "⭐ 8.4/10",
-      image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/3-idiots.jpg",
       description:
         "ইঞ্জিনিয়ারিং কলেজের বন্ধুত্ব ও প্রথাগত মুখস্থ শিক্ষার বিরুদ্ধে মেধা, আত্মবিশ্বাস ও স্বপ্নের জয়ের চিরন্তন অনুপ্রেরণাদায়ী সিনেমা।",
       quote: "Pursue excellence, and success will chase you with pants down!",
@@ -65,7 +66,7 @@ function MoviesPage() {
       subGenre: "Adventure / Friendship / Life",
       director: "Zoya Akhtar",
       rating: "⭐ 8.2/10",
-      image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/znmd.jpg",
       description:
         "স্পেনের মনোরম রাস্তায় তিন ঘনিষ্ঠ বন্ধুর রোড ট্রিপ, মনের লুকানো ভয়কে জয় করা এবং প্রতিটি মুহূর্তকে প্রাণভরে উপভোগ করতে শেখার মনোমুগ্ধকর যাত্রা।",
       quote: "Dilon mein tum apni betabiyan leke chal rahe ho toh zinda ho tum!",
@@ -78,9 +79,9 @@ function MoviesPage() {
       subGenre: "Nostalgia / Pure Love / Drama",
       director: "C. Prem Kumar",
       rating: "⭐ 8.5/10",
-      image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/96.jpg",
       description:
-        "২২ বছর পর ব্যাচ রিইউনিয়নে স্কুলজীবনের দুই প্রেমিক রাম ও জানুর এক রাতের পুনর্মিলন। নিঃশব্দ প্রেম ও নস্টালজিয়ার হৃদস্পর্শী কাব্যিক উপাখ্যান।",
+        "২২ বছর পর ব্যাচ রিইউনিয়নে স্কুলজীবনের দুই প্রেমিক রাম ও জানুর এক রাতের পুনর্মিলন। নিঃশব্দ প্রেম ও নস্টালজিয়ার হৃদয়স্পর্শী কাব্যিক উপাখ্যান।",
       quote: "কিছু ভালোবাসা কোনোদিন পাওয়ার জন্য নয়, শুধু মনে রাখার জন্যই বেঁচে থাকে।",
     },
     {
@@ -91,7 +92,7 @@ function MoviesPage() {
       subGenre: "Tragedy / Classic / Drama",
       director: "Sanjay Leela Bhansali",
       rating: "⭐ 7.5/10",
-      image: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/devdas.jpg",
       description:
         "শরৎচন্দ্র চট্টোপাধ্যায়ের অমর উপন্যাস অবলম্বনে নির্মিত মহাকাব্যিক ট্র্যাজেডি। গভীর ভালোবাসা, অহংকার এবং আত্মধ্বংসের অশ্রুসজল উপাখ্যান।",
       quote: "বাবুজি নে কহা গাঁও ছোড় দো, সবনে কহা পারো কো ছোড় দো...",
@@ -104,7 +105,7 @@ function MoviesPage() {
       subGenre: "Musical Romance / Tragedy",
       director: "Mohit Suri",
       rating: "⭐ 7.1/10",
-      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/aashiqui-2.jpg",
       description:
         "সঙ্গীতের সুরে জড়ানো রাহুল ও আরোহীর আত্মত্যাগময় অমর প্রেম। সুর, ভালোবাসা এবং আত্মবিসর্জনের হৃদয়বিদারক গল্প।",
       quote: "তুম হি হো, অব তুম হি হো, জিন্দেগি অব তুম হি হো...",
@@ -117,7 +118,7 @@ function MoviesPage() {
       subGenre: "Action / Superhero / Origin",
       director: "Sam Raimi",
       rating: "⭐ 7.4/10",
-      image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/spiderman-1.jpg",
       description:
         "সাধারণ স্কুলছাত্র পিটার পার্কারের সুপারহিরো স্পাইডার-ম্যান হয়ে ওঠার ক্লাসিক সূচনা এবং দায়িত্ববোধের প্রথম শিক্ষা।",
       quote: "With great power comes great responsibility.",
@@ -130,7 +131,7 @@ function MoviesPage() {
       subGenre: "Action / Heroism / Sci-Fi",
       director: "Sam Raimi",
       rating: "⭐ 7.5/10",
-      image: "https://images.unsplash.com/photo-1604200213928-ba3cf4fc8436?w=600&auto=format&fit=crop&q=80",
+      image: "/movies/spiderman-2.jpg",
       description:
         "নিজের ব্যক্তিগত সুখ ও শহরের সুরক্ষার মধ্যে পিটার পার্কারের অভ্যন্তরীণ দ্বন্দ্ব এবং ডক্টর অক্টোপাসের বিরুদ্ধে লড়াইয়ের সর্বকালের অন্যতম সেরা সুপারহিরো মুভি।",
       quote: "Sometimes, to do what's right, we have to give up the thing we want the most.",
@@ -213,23 +214,32 @@ function MoviesPage() {
         </div>
       )}
 
-      {/* Movies Cards Grid */}
+      {/* Movies Cards Grid with Authentic Cinema Posters */}
       <div className="row g-4">
         {filteredMovies.map((movie) => (
           <div className="col-md-6 col-lg-4" key={movie.id}>
             <div className="card h-100 shadow-sm border-0 overflow-hidden hover-shadow d-flex flex-column justify-content-between">
               <div>
-                <div className="position-relative" style={{ height: "200px", overflow: "hidden" }}>
+                <div
+                  className="position-relative bg-dark cursor-pointer text-center"
+                  style={{ height: "340px", cursor: "pointer", overflow: "hidden" }}
+                  onClick={() => setSelectedImage(movie.image)}
+                  title="Click to view full poster"
+                >
                   <img
                     src={movie.image}
                     alt={movie.title}
-                    className="w-100 h-100 object-fit-cover"
+                    className="w-100 h-100"
+                    style={{ objectFit: "cover", objectPosition: "center top" }}
                   />
-                  <span className="position-absolute top-0 end-0 bg-dark text-white px-3 py-1 m-2 rounded-pill small fw-bold shadow">
+                  <span className="position-absolute top-0 end-0 bg-dark text-white px-3 py-1 m-2 rounded-pill small fw-bold shadow opacity-90">
                     {movie.rating}
                   </span>
                   <span className="position-absolute bottom-0 start-0 bg-primary text-white px-2 py-1 m-2 rounded small fw-semibold">
                     {movie.genre}
+                  </span>
+                  <span className="position-absolute bottom-0 end-0 bg-dark text-white px-2 py-1 small rounded-start opacity-75">
+                    🔍 Poster
                   </span>
                 </div>
 
@@ -264,6 +274,36 @@ function MoviesPage() {
           </div>
         ))}
       </div>
+
+      {/* Image Modal for Full Theatrical Poster View */}
+      {selectedImage && (
+        <div
+          className="modal fade show d-block"
+          tabIndex="-1"
+          style={{ backgroundColor: "rgba(0,0,0,0.85)", zIndex: 1055 }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="modal-dialog modal-dialog-centered modal-md">
+            <div className="modal-content bg-transparent border-0 text-center">
+              <div className="modal-body p-0 position-relative">
+                <button
+                  type="button"
+                  className="btn btn-light position-absolute top-0 end-0 m-3 rounded-circle shadow"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  ✕
+                </button>
+                <img
+                  src={selectedImage}
+                  alt="Official Movie Poster Full"
+                  className="img-fluid rounded-3 shadow-lg"
+                  style={{ maxHeight: "88vh", objectFit: "contain" }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
