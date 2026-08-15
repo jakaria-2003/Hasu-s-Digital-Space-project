@@ -89,11 +89,26 @@ function ContactPage() {
             </div>
           </div>
 
-          <div className="d-flex align-items-center p-3 bg-light rounded-3 shadow-sm">
+          <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
             <div className="fs-2 me-3 text-warning">⚡</div>
             <div>
               <h6 className="fw-bold mb-0">Availability</h6>
               <p className="text-muted mb-0 small">Open for Web Development Opportunities & Projects</p>
+            </div>
+          </div>
+
+          <div className="d-flex align-items-center p-3 bg-primary-subtle border border-primary-subtle rounded-3 shadow-sm">
+            <div className="fs-2 me-3 text-primary">💼</div>
+            <div className="flex-grow-1">
+              <h6 className="fw-bold mb-0 text-dark">LinkedIn Profile</h6>
+              <a
+                href="https://www.linkedin.com/in/abu-jakaria-hasu-84024a339"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary small fw-semibold text-decoration-none"
+              >
+                in/abu-jakaria-hasu-84024a339 ↗
+              </a>
             </div>
           </div>
         </div>

@@ -90,6 +90,14 @@ function AboutPage() {
             <Link to="/contact" className="btn btn-primary px-4 py-2 fw-semibold">
               Get in Touch ✉️
             </Link>
+            <a
+              href="https://www.linkedin.com/in/abu-jakaria-hasu-84024a339"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline-primary px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2"
+            >
+              LinkedIn Profile 💼
+            </a>
             <Link to="/projects" className="btn btn-outline-dark px-4 py-2 fw-semibold">
               Browse Projects 🚀
             </Link>
