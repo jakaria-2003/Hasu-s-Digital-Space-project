@@ -74,6 +74,9 @@ export async function initDatabase() {
       )
     `);
 
+    await ensureColumnExists("certificates", "credential_url", "VARCHAR(500) NULL AFTER issue_date");
+    await ensureColumnExists("certificates", "image", "VARCHAR(500) NULL AFTER credential_url");
+
     // 4. Contacts Table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS contacts (
@@ -115,127 +118,77 @@ export async function initDatabase() {
       )
     `);
 
-    // Specific Books list requested by user
-    const booksToInsert = [
+    // Verified Certificates List from User's Authentic Certificates
+    const certificatesToInsert = [
       {
-        title: "Sajahan Tonoy (শাহজাহান তন্ময়)",
-        author: "শাহজাহান তন্ময় (Shahjahan Tanmoy)",
-        category: "Bengali Literature",
-        status: "completed",
-        rating: 5,
-        notes: "অনুপ্রেরণামূলক ও জনপ্রিয় বাংলা সাহিত্য রচনা।",
-        read_url: "https://archive.org/details/books",
-        pdf_url: "https://archive.org/details/books",
+        title: "The Bits and Bytes of Computer Networking",
+        issuer: "Google (Coursera)",
+        issue_date: "March 10, 2026",
+        credential_url: "https://coursera.org/verify/ORZRFG1G6RPQ",
+        image: "/certificates/google-networking.jpg",
+        description: "Google Career Certificate in computer networking architecture, TCP/IP, UDP, DNS, routing, and cloud infrastructure.",
       },
       {
-        title: "Ma (মা)",
-        author: "আনিসুল হক (Anisul Hoque)",
-        category: "Liberation War & Novel",
-        status: "completed",
-        rating: 5,
-        notes: "মুক্তিযুদ্ধের পটভূমিতে রচিত শহীদ জননী সাফিয়া বেগম ও তার বীর সন্তান আজাদের অশ্রুসজল বাস্তব গল্প।",
-        read_url: "https://archive.org/details/books",
-        pdf_url: "https://archive.org/details/books",
+        title: "Mastering Design Patterns with Java",
+        issuer: "CodeSignal",
+        issue_date: "April 11, 2026",
+        credential_url: "https://codesignal.com/learn/certificates/cmnhk7moo004bl804aqgvm1vo/course-paths/85",
+        image: "/certificates/codesignal-java.png",
+        description: "Advanced Java software engineering, OOP design patterns, computer science fundamentals, and system architecture.",
       },
       {
-        title: "Paradoxical Sajid (প্যারাডক্সিক্যাল সাজিদ)",
-        author: "আরিফ আজাদ (Arif Azad)",
-        category: "Islamic & Logic",
-        status: "completed",
-        rating: 5,
-        notes: "যুক্তি, বিজ্ঞান ও ধর্মীয় দর্শনের চমৎকার সংমিশ্রণে রচিত সর্বাধিক বিক্রিত জনপ্রিয় বই।",
-        read_url: "https://archive.org/details/books",
-        pdf_url: "https://archive.org/details/books",
+        title: "Leadership Qualities – Boss VS Leader",
+        issuer: "GoEdu (GEAC Accredited)",
+        issue_date: "June 09, 2026",
+        credential_url: "https://goedu.ac",
+        image: "/certificates/goedu-leadership.png",
+        description: "Completed with distinction, certified in modern leadership principles, strategic decision making, and team management.",
       },
       {
-        title: "Fera (ফেরা)",
-        author: "আরিফ আজাদ (Arif Azad)",
-        category: "Self Growth & Spirituality",
-        status: "completed",
-        rating: 5,
-        notes: "জীবনের ভুল পথ থেকে আত্মশুদ্ধি ও আলোর দিকে ফিরে আসার অনুপ্রেরণামূলক গল্পগাথা।",
-        read_url: "https://archive.org/details/books",
-        pdf_url: "https://archive.org/details/books",
+        title: "Unified Modeling Language (UML)",
+        issuer: "European Open University",
+        issue_date: "April 18, 2026",
+        credential_url: "https://europeanopenuniversity.com",
+        image: "/certificates/european-uml.png",
+        description: "Professional Certificate Program in software system modeling, class diagrams, sequence diagrams, and architecture design.",
       },
       {
-        title: "Opekkha (অপেক্ষা)",
-        author: "হুমায়ূন আহমেদ (Humayun Ahmed)",
-        category: "Bengali Classic Novel",
-        status: "completed",
-        rating: 5,
-        notes: "একটি পরিবারের নিখোঁজ বাবার ফিরে আসার আকুল প্রতীক্ষা ও আবেগময় জীবনকাহিনীর ক্লাসিক উপন্যাস।",
-        read_url: "https://archive.org/details/books",
-        pdf_url: "https://archive.org/details/books",
-      },
-      {
-        title: "Devdas (দেবদাস)",
-        author: "শরৎচন্দ্র চট্টোপাধ্যায় (Sarat Chandra)",
-        category: "Bengali Classic",
-        status: "completed",
-        rating: 5,
-        notes: "কালজয়ী অমর প্রেমের উপন্যাস। দেবদাস ও পার্বতীর ভালোবাসার ইতিহাস।",
-        read_url: "https://en.wikisource.org/wiki/bn:%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A6%A6%E0%A6%BE%E0%A6%B8",
-        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
-      },
-      {
-        title: "Clean Code",
-        author: "Robert C. Martin",
-        category: "Software Engineering",
-        status: "completed",
-        rating: 5,
-        notes: "A handbook of agile software craftsmanship and clean programming practices.",
-        read_url: "https://archive.org/details/clean-code-9780136083238",
-        pdf_url: "https://archive.org/details/clean-code-9780136083238",
-      },
-      {
-        title: "Atomic Habits",
-        author: "James Clear",
-        category: "Self Improvement",
-        status: "completed",
-        rating: 5,
-        notes: "An easy & proven way to build good habits and break bad ones.",
-        read_url: "https://archive.org/details/atomic-habits-pdfdrive",
-        pdf_url: "https://archive.org/details/atomic-habits-pdfdrive",
+        title: "12th Air Scout Unit Leader Basic Course",
+        issuer: "Bangladesh Scouts, Air Region",
+        issue_date: "January 19, 2025",
+        credential_url: "https://scouts.gov.bd",
+        image: "/certificates/bangladesh-air-scouts.png",
+        description: "Represented Daffodil International University Air Rover Scout Group (Cert No: 0038/2025) in leadership & scout training in Cox's Bazar.",
       },
     ];
 
-    for (const book of booksToInsert) {
-      const [existing] = await pool.query(
-        "SELECT id FROM books WHERE title LIKE ?",
-        [`%${book.title.split("(")[0].trim()}%`]
-      );
+    for (const cert of certificatesToInsert) {
+      const [existing] = await pool.query("SELECT id FROM certificates WHERE title LIKE ?", [
+        `%${cert.title.slice(0, 20)}%`,
+      ]);
       if (existing.length === 0) {
         await pool.query(
-          `INSERT INTO books (title, author, category, status, rating, notes, read_url, pdf_url)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-          [
-            book.title,
-            book.author,
-            book.category,
-            book.status,
-            book.rating,
-            book.notes,
-            book.read_url,
-            book.pdf_url,
-          ]
+          `INSERT INTO certificates (title, issuer, issue_date, credential_url, image, description)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [cert.title, cert.issuer, cert.issue_date, cert.credential_url, cert.image, cert.description]
         );
-        console.log(` Added book: ${book.title}`);
+        console.log(` Added Certificate: ${cert.title}`);
       } else {
         await pool.query(
-          `UPDATE books SET 
+          `UPDATE certificates SET 
             title = ?,
-            author = ?,
-            category = ?,
-            notes = ?,
-            read_url = ?,
-            pdf_url = ?
+            issuer = ?,
+            issue_date = ?,
+            credential_url = ?,
+            image = ?,
+            description = ?
            WHERE id = ?`,
-          [book.title, book.author, book.category, book.notes, book.read_url, book.pdf_url, existing[0].id]
+          [cert.title, cert.issuer, cert.issue_date, cert.credential_url, cert.image, cert.description, existing[0].id]
         );
       }
     }
 
-    console.log(" Database tables checked and all books synced!");
+    console.log(" Database tables checked and all certificates synced!");
   } catch (error) {
     console.error("Database initialization error:", error.message);
   }
