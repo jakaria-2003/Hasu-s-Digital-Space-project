@@ -188,7 +188,63 @@ export async function initDatabase() {
       }
     }
 
-    console.log(" Database tables checked and all certificates synced!");
+    // Projects Sync
+    const projectsToInsert = [
+      {
+        title: "Smart Indoor Plant Pot",
+        description: "A perfect blend of technology and nature: Developed an automated, efficient, and hassle-free plant care system using IoT and smart monitoring sensors. Team: Abu Jakaria Hasu, Rifat Hossain, Eyas, Sornal, and Mukta at Daffodil International University.",
+        technologies: "IoT | Sensors | Embedded Systems | Automation",
+        image: "/projects/smart-plant-pot.jpg",
+        github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+        live_link: "https://hasu-s-digital-space-project.vercel.app/projects",
+        featured: 1,
+      },
+      {
+        title: "Smart Waste Collection System",
+        description: "IoT and cloud-driven smart waste management platform with real-time smart bin monitoring, dynamic vehicle route optimization, citizen complaint portal, and municipal analytics dashboard.",
+        technologies: "IoT | React.js | Node.js | MySQL | Cloud",
+        image: "/smart-waste.png",
+        github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+        live_link: "https://hasu-s-digital-space-project.vercel.app/projects",
+        featured: 1,
+      },
+      {
+        title: "Portfolio Website",
+        description: "Personal dynamic portfolio showcasing development projects, skills, and travels.",
+        technologies: "React | Express | MySQL",
+        image: "/portfolio.png",
+        github_link: "https://github.com",
+        live_link: "https://hasu.dev",
+        featured: 1,
+      },
+      {
+        title: "Restaurant Management System",
+        description: "Comprehensive order tracking, kitchen workflow, and billing system.",
+        technologies: "React | Express | MySQL",
+        image: "/restaurant.png",
+        github_link: "https://github.com",
+        live_link: "https://hasu-restaurant.dev",
+        featured: 1,
+      },
+    ];
+
+    for (const proj of projectsToInsert) {
+      const [existing] = await pool.query("SELECT id FROM projects WHERE title LIKE ?", [`%${proj.title.slice(0, 15)}%`]);
+      if (existing.length === 0) {
+        await pool.query(
+          `INSERT INTO projects (title, description, technologies, image, github_link, live_link, featured)
+           VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [proj.title, proj.description, proj.technologies, proj.image, proj.github_link, proj.live_link, proj.featured]
+        );
+      } else {
+        await pool.query(
+          `UPDATE projects SET description = ?, technologies = ?, image = ?, featured = ? WHERE id = ?`,
+          [proj.description, proj.technologies, proj.image, proj.featured, existing[0].id]
+        );
+      }
+    }
+
+    console.log(" Database tables checked and all certificates & projects synced!");
   } catch (error) {
     console.error("Database initialization error:", error.message);
   }
