@@ -115,57 +115,67 @@ export async function initDatabase() {
       )
     `);
 
-    // Ensure all requested Bengali classic books and programming books are present
+    // Specific Books list requested by user
     const booksToInsert = [
       {
-        title: "দেবদাস (Devdas)",
-        author: "শরৎচন্দ্র চট্টোপাধ্যায় (Sarat Chandra Chattopadhyay)",
+        title: "Sajahan Tonoy (শাহজাহান তন্ময়)",
+        author: "শাহজাহান তন্ময় (Shahjahan Tanmoy)",
         category: "Bengali Literature",
         status: "completed",
         rating: 5,
-        notes: "একটি কালজয়ী অমর প্রেমের উপন্যাস। দেবদাস ও পার্বতীর গভীর ভালোবাসার এক অনুপম আখ্যান।",
-        read_url: "https://en.wikisource.org/wiki/bn:%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A6%A6%E0%A6%BE%E0%A6%B8",
-        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
-      },
-      {
-        title: "শাহজাহান (Shahjahan)",
-        author: "দ্বিজেন্দ্রলাল রায় (D. L. Roy)",
-        category: "Bengali Drama & History",
-        status: "completed",
-        rating: 5,
-        notes: "ঐতিহাসিক নাটক। সম্রাট শাহজাহানের জীবনের শেষ দিনগুলোর ট্র্যাজেডি ও মানবিক মূল্যবোধের চিত্রায়ন।",
-        read_url: "https://bn.wikisource.org/wiki/%E0%A6%B6%E0%A6%BE%E0%A6%B9%E0%A6%9C%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%A8",
-        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
-      },
-      {
-        title: "তুমি সন্ধ্যা অলকানন্দা (Tumi Sondhya Alakananda)",
-        author: "সুনীল গঙ্গোপাধ্যায় (Sunil Gangopadhyay)",
-        category: "Bengali Poetry & Fiction",
-        status: "completed",
-        rating: 5,
-        notes: "প্রেম, রোমান্টিকতা ও গভীর অনুভূতির এক মনোমুগ্ধকর কাব্যিক উপন্যাস।",
+        notes: "অনুপ্রেরণামূলক ও জনপ্রিয় বাংলা সাহিত্য রচনা।",
         read_url: "https://archive.org/details/books",
         pdf_url: "https://archive.org/details/books",
       },
       {
-        title: "পদ্মা নদীর মাঝি (Padma Nadir Majhi)",
-        author: "মানিক বন্দ্যোপাধ্যায় (Manik Bandopadhyay)",
+        title: "Ma (মা)",
+        author: "আনিসুল হক (Anisul Hoque)",
+        category: "Liberation War & Novel",
+        status: "completed",
+        rating: 5,
+        notes: "মুক্তিযুদ্ধের পটভূমিতে রচিত শহীদ জননী সাফিয়া বেগম ও তার বীর সন্তান আজাদের অশ্রুসজল বাস্তব গল্প।",
+        read_url: "https://archive.org/details/books",
+        pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "Paradoxical Sajid (প্যারাডক্সিক্যাল সাজিদ)",
+        author: "আরিফ আজাদ (Arif Azad)",
+        category: "Islamic & Logic",
+        status: "completed",
+        rating: 5,
+        notes: "যুক্তি, বিজ্ঞান ও ধর্মীয় দর্শনের চমৎকার সংমিশ্রণে রচিত সর্বাধিক বিক্রিত জনপ্রিয় বই।",
+        read_url: "https://archive.org/details/books",
+        pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "Fera (ফেরা)",
+        author: "আরিফ আজাদ (Arif Azad)",
+        category: "Self Growth & Spirituality",
+        status: "completed",
+        rating: 5,
+        notes: "জীবনের ভুল পথ থেকে আত্মশুদ্ধি ও আলোর দিকে ফিরে আসার অনুপ্রেরণামূলক গল্পগাথা।",
+        read_url: "https://archive.org/details/books",
+        pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "Opekkha (অপেক্ষা)",
+        author: "হুমায়ূন আহমেদ (Humayun Ahmed)",
         category: "Bengali Classic Novel",
         status: "completed",
         rating: 5,
-        notes: "পদ্মা নদীর তীরবর্তী জেলেদের জীবনসংগ্রাম, প্রেম ও বাস্তবতার অমর বাংলা উপন্যাস। কুবের ও কপিলা এর প্রধান চরিত্র।",
-        read_url: "https://bn.wikisource.org/wiki/%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A6%A6%E0%A7%80%E0%A6%B0_%E0%A6%AE%E0%A6%BE%E0%A6%9D%E0%A6%BF",
-        pdf_url: "https://archive.org/details/padmanadirmajhi",
-      },
-      {
-        title: "তন্ময় (Tonmoy)",
-        author: "হুমায়ূন আহমেদ (Humayun Ahmed)",
-        category: "Bengali Literature",
-        status: "completed",
-        rating: 5,
-        notes: "মনোমুগ্ধকর সমসাময়িক বাংলা উপন্যাস ও গল্প সংকলন।",
+        notes: "একটি পরিবারের নিখোঁজ বাবার ফিরে আসার আকুল প্রতীক্ষা ও আবেগময় জীবনকাহিনীর ক্লাসিক উপন্যাস।",
         read_url: "https://archive.org/details/books",
         pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "Devdas (দেবদাস)",
+        author: "শরৎচন্দ্র চট্টোপাধ্যায় (Sarat Chandra)",
+        category: "Bengali Classic",
+        status: "completed",
+        rating: 5,
+        notes: "কালজয়ী অমর প্রেমের উপন্যাস। দেবদাস ও পার্বতীর ভালোবাসার ইতিহাস।",
+        read_url: "https://en.wikisource.org/wiki/bn:%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A6%A6%E0%A6%BE%E0%A6%B8",
+        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
       },
       {
         title: "Clean Code",
@@ -173,7 +183,7 @@ export async function initDatabase() {
         category: "Software Engineering",
         status: "completed",
         rating: 5,
-        notes: "A handbook of agile software craftsmanship and best programming practices.",
+        notes: "A handbook of agile software craftsmanship and clean programming practices.",
         read_url: "https://archive.org/details/clean-code-9780136083238",
         pdf_url: "https://archive.org/details/clean-code-9780136083238",
       },
@@ -183,34 +193,17 @@ export async function initDatabase() {
         category: "Self Improvement",
         status: "completed",
         rating: 5,
-        notes: "An easy and proven way to build good habits and break bad ones.",
+        notes: "An easy & proven way to build good habits and break bad ones.",
         read_url: "https://archive.org/details/atomic-habits-pdfdrive",
         pdf_url: "https://archive.org/details/atomic-habits-pdfdrive",
-      },
-      {
-        title: "React Explained",
-        author: "Zac Gordon",
-        category: "Frontend Web Development",
-        status: "completed",
-        rating: 4,
-        notes: "Your step-by-step guide to learning React and building modern apps.",
-        read_url: "https://react.dev/learn",
-        pdf_url: "https://react.dev",
-      },
-      {
-        title: "JavaScript: The Good Parts",
-        author: "Douglas Crockford",
-        category: "Programming",
-        status: "completed",
-        rating: 4,
-        notes: "Uncovering the beauty and elegance of JavaScript as a powerful language.",
-        read_url: "https://archive.org/details/javascript-the-good-parts",
-        pdf_url: "https://archive.org/details/javascript-the-good-parts",
       },
     ];
 
     for (const book of booksToInsert) {
-      const [existing] = await pool.query("SELECT id FROM books WHERE title = ?", [book.title]);
+      const [existing] = await pool.query(
+        "SELECT id FROM books WHERE title LIKE ?",
+        [`%${book.title.split("(")[0].trim()}%`]
+      );
       if (existing.length === 0) {
         await pool.query(
           `INSERT INTO books (title, author, category, status, rating, notes, read_url, pdf_url)
@@ -230,18 +223,19 @@ export async function initDatabase() {
       } else {
         await pool.query(
           `UPDATE books SET 
-            author = COALESCE(?, author),
-            category = COALESCE(?, category),
-            notes = COALESCE(?, notes),
-            read_url = COALESCE(?, read_url),
-            pdf_url = COALESCE(?, pdf_url)
+            title = ?,
+            author = ?,
+            category = ?,
+            notes = ?,
+            read_url = ?,
+            pdf_url = ?
            WHERE id = ?`,
-          [book.author, book.category, book.notes, book.read_url, book.pdf_url, existing[0].id]
+          [book.title, book.author, book.category, book.notes, book.read_url, book.pdf_url, existing[0].id]
         );
       }
     }
 
-    console.log(" Database tables checked and all books ready!");
+    console.log(" Database tables checked and all books synced!");
   } catch (error) {
     console.error("Database initialization error:", error.message);
   }

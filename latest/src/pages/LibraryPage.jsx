@@ -31,21 +31,17 @@ function LibraryPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const renderStars = (rating = 5) => {
-    return "⭐".repeat(Math.min(5, Math.max(1, rating)));
-  };
-
   return (
     <div className="library-page container py-5">
       <div className="text-center mb-4">
-        <h1 className="fw-bold display-5">My Digital Library & Bookshelf 📚</h1>
+        <h1 className="fw-bold display-5">My Library 📖</h1>
         <p className="text-muted">
-          Classic Bengali literature, computer science books, and inspirational reading collections with online reading access.
+          My favorite book collections with online reading & PDF access
         </p>
         <hr className="w-25 mx-auto" />
       </div>
 
-      {/* Search & Category Filter */}
+      {/* Search Bar */}
       <div className="row justify-content-center mb-4">
         <div className="col-md-8 col-lg-6">
           <div className="input-group shadow-sm">
@@ -53,7 +49,7 @@ function LibraryPage() {
             <input
               type="text"
               className="form-control border-start-0 py-2"
-              placeholder="Search books by title, author, or keyword..."
+              placeholder="Search books..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -72,7 +68,7 @@ function LibraryPage() {
 
       {/* Category Pills */}
       {categories.length > 1 && (
-        <div className="d-flex justify-content-center flex-wrap gap-2 mb-5">
+        <div className="d-flex justify-content-center flex-wrap gap-2 mb-4">
           {categories.map((cat, idx) => (
             <button
               key={idx}
@@ -90,76 +86,74 @@ function LibraryPage() {
       {loading && (
         <div className="text-center my-5">
           <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-2 text-muted">Opening digital library shelves...</p>
+          <p className="mt-2 text-muted">Loading books from database...</p>
         </div>
       )}
 
       {!loading && filteredBooks.length === 0 && (
         <div className="text-center my-5 text-muted">
-          <h4>No books found matching your criteria</h4>
-          <p>Try searching for a different book or clear filters.</p>
+          <h4>No books found</h4>
         </div>
       )}
 
-      {/* Books Grid */}
-      <div className="row g-4">
-        {filteredBooks.map((book) => (
-          <div className="col-md-6 col-lg-4" key={book.id}>
-            <div className="card h-100 shadow-sm border-0 d-flex flex-column justify-content-between p-3 hover-shadow">
-              <div>
-                <div className="d-flex justify-content-between align-items-start mb-2">
-                  <span className="badge bg-primary-subtle text-primary border border-primary-subtle">
-                    {book.category || "General"}
-                  </span>
-                  <span className="small">{renderStars(book.rating)}</span>
+      {/* Clean List View matching the classic original style with modern action buttons */}
+      <div className="card shadow-sm border-0 rounded-3 overflow-hidden">
+        <ul className="list-group list-group-flush">
+          {filteredBooks.map((book) => (
+            <li
+              className="list-group-item p-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 hover-bg-light"
+              key={book.id}
+            >
+              <div className="flex-grow-1">
+                <div className="d-flex align-items-center flex-wrap gap-2 mb-1">
+                  <h5 className="fw-bold mb-0 text-dark">
+                    📖 {book.title}
+                  </h5>
+                  {book.category && (
+                    <span className="badge bg-light text-dark border">
+                      {book.category}
+                    </span>
+                  )}
                 </div>
 
-                <h4 className="fw-bold card-title mb-1 text-dark">
-                  📖 {book.title}
-                </h4>
-
-                <p className="text-muted small mb-2">
-                  Author: <strong className="text-dark">{book.author || "Unknown"}</strong>
+                <p className="text-muted mb-1 small">
+                  Author: <strong className="text-secondary">{book.author || "Unknown"}</strong>
                 </p>
 
                 {book.notes && (
-                  <p className="card-text text-secondary small mt-2 lh-base">
+                  <p className="text-secondary small mb-0 lh-sm">
                     {book.notes}
                   </p>
                 )}
               </div>
 
-              {/* Action Buttons: Read Online / PDF */}
-              <div className="mt-3 pt-3 border-top d-flex gap-2">
-                {book.read_url ? (
+              {/* Action Read & PDF buttons */}
+              <div className="d-flex align-items-center gap-2 flex-shrink-0">
+                {book.read_url && (
                   <a
                     href={book.read_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary btn-sm flex-fill fw-semibold shadow-sm"
+                    className="btn btn-primary btn-sm px-3 fw-semibold shadow-sm"
                   >
-                    📖 Read Online
+                    Read Online 📖
                   </a>
-                ) : (
-                  <button className="btn btn-secondary btn-sm flex-fill" disabled>
-                    Reading
-                  </button>
                 )}
-
                 {book.pdf_url && (
                   <a
                     href={book.pdf_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-outline-dark btn-sm flex-fill fw-semibold"
+                    className="btn btn-outline-dark btn-sm px-3 fw-semibold"
                   >
-                    📄 View PDF
+                    View PDF 📄
                   </a>
                 )}
+                <span className="badge bg-success ms-1">Read</span>
               </div>
-            </div>
-          </div>
-        ))}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
