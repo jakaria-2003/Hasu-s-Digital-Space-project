@@ -61,7 +61,7 @@ function HomePage() {
     {
       title: "Sports & Hobbies",
       icon: "⚽",
-      desc: "FC Barcelona fandom, football, cricket, scouting drills, and photography.",
+      desc: "Marathon running, 8-ball pool, tactical chess, traditional net fishing, and scouting.",
       link: "/lifestyle",
       badge: "Lifestyle",
       btnClass: "btn-primary",

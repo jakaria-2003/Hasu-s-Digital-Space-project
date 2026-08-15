@@ -44,14 +44,6 @@ function SportsHobbiesPage() {
       hasImage: true,
     },
     {
-      title: "Landscape & Travel Photography 📸",
-      category: "Creative Arts",
-      description:
-        "Capturing scenic beauty across Bangladesh — from the rolling hills of Sajek Valley to the tea gardens of Sylhet and the shores of Cox's Bazar.",
-      icon: "📷",
-      hasImage: false,
-    },
-    {
       title: "Air Rover Scouting & Leadership ⚜️",
       category: "Community & Leadership",
       description:
