@@ -10,9 +10,9 @@ function AboutPage() {
       status: "In Progress",
       badge: "University",
       role: "Class Representative (CR) 👑",
-      result: "Batch 42 (ID: 241-35-096)",
+      result: "Ongoing (Enrolled)",
       description:
-        "Serving as the official Class Representative (CR) for the batch. Specializing in Full-Stack Web Development, Data Science & Machine Learning, System Analysis & Design (SE-231 Capstone), and IoT Solutions.",
+        "Serving as the official Class Representative (CR). Specializing in Full-Stack Web Development, Data Science & Machine Learning, System Analysis & Design, and IoT Solutions.",
       keyCourses: [
         "System Analysis & Design",
         "Data Structures & Algorithms",
