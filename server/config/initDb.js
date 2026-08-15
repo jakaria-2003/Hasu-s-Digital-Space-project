@@ -33,7 +33,6 @@ export async function initDatabase() {
       )
     `);
 
-    // Ensure all columns exist in case projects table was created previously with fewer columns
     await ensureColumnExists("projects", "technologies", "VARCHAR(255) NULL AFTER description");
     await ensureColumnExists("projects", "featured", "BOOLEAN DEFAULT FALSE AFTER live_link");
     await ensureColumnExists("projects", "updated_at", "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
@@ -50,10 +49,15 @@ export async function initDatabase() {
         notes TEXT,
         cover_image VARCHAR(500),
         read_date VARCHAR(100),
+        pdf_url VARCHAR(500),
+        read_url VARCHAR(500),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
+
+    await ensureColumnExists("books", "pdf_url", "VARCHAR(500) NULL AFTER cover_image");
+    await ensureColumnExists("books", "read_url", "VARCHAR(500) NULL AFTER pdf_url");
 
     // 3. Certificates Table
     await pool.query(`
@@ -111,72 +115,133 @@ export async function initDatabase() {
       )
     `);
 
-    // Seed default projects if empty
-    const [projectRows] = await pool.query("SELECT COUNT(*) AS count FROM projects");
-    if (projectRows[0].count === 0) {
-      await pool.query(`
-        INSERT INTO projects (title, description, technologies, image, github_link, live_link, featured) VALUES
-        ('Portfolio Website', 'Personal dynamic portfolio showcasing development projects, skills, and travels.', 'React | Express | MySQL', '/portfolio.png', 'https://github.com', 'https://hasu.dev', true),
-        ('Student Management System', 'Full-stack academic portal for managing student records, courses, and gradebooks.', 'React | Node.js | MySQL', '/student.png', 'https://github.com', 'https://hasu-student.dev', true),
-        ('Restaurant Management System', 'Comprehensive order tracking, kitchen workflow, and billing system.', 'React | Express | MySQL', '/restaurant.png', 'https://github.com', 'https://hasu-restaurant.dev', true)
-      `);
-      console.log(" Seeded initial projects");
+    // Ensure all requested Bengali classic books and programming books are present
+    const booksToInsert = [
+      {
+        title: "দেবদাস (Devdas)",
+        author: "শরৎচন্দ্র চট্টোপাধ্যায় (Sarat Chandra Chattopadhyay)",
+        category: "Bengali Literature",
+        status: "completed",
+        rating: 5,
+        notes: "একটি কালজয়ী অমর প্রেমের উপন্যাস। দেবদাস ও পার্বতীর গভীর ভালোবাসার এক অনুপম আখ্যান।",
+        read_url: "https://en.wikisource.org/wiki/bn:%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A6%A6%E0%A6%BE%E0%A6%B8",
+        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
+      },
+      {
+        title: "শাহজাহান (Shahjahan)",
+        author: "দ্বিজেন্দ্রলাল রায় (D. L. Roy)",
+        category: "Bengali Drama & History",
+        status: "completed",
+        rating: 5,
+        notes: "ঐতিহাসিক নাটক। সম্রাট শাহজাহানের জীবনের শেষ দিনগুলোর ট্র্যাজেডি ও মানবিক মূল্যবোধের চিত্রায়ন।",
+        read_url: "https://bn.wikisource.org/wiki/%E0%A6%B6%E0%A6%BE%E0%A6%B9%E0%A6%9C%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%A8",
+        pdf_url: "https://archive.org/details/in.ernet.dli.2015.452654",
+      },
+      {
+        title: "তুমি সন্ধ্যা অলকানন্দা (Tumi Sondhya Alakananda)",
+        author: "সুনীল গঙ্গোপাধ্যায় (Sunil Gangopadhyay)",
+        category: "Bengali Poetry & Fiction",
+        status: "completed",
+        rating: 5,
+        notes: "প্রেম, রোমান্টিকতা ও গভীর অনুভূতির এক মনোমুগ্ধকর কাব্যিক উপন্যাস।",
+        read_url: "https://archive.org/details/books",
+        pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "পদ্মা নদীর মাঝি (Padma Nadir Majhi)",
+        author: "মানিক বন্দ্যোপাধ্যায় (Manik Bandopadhyay)",
+        category: "Bengali Classic Novel",
+        status: "completed",
+        rating: 5,
+        notes: "পদ্মা নদীর তীরবর্তী জেলেদের জীবনসংগ্রাম, প্রেম ও বাস্তবতার অমর বাংলা উপন্যাস। কুবের ও কপিলা এর প্রধান চরিত্র।",
+        read_url: "https://bn.wikisource.org/wiki/%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A6%A6%E0%A7%80%E0%A6%B0_%E0%A6%AE%E0%A6%BE%E0%A6%9D%E0%A6%BF",
+        pdf_url: "https://archive.org/details/padmanadirmajhi",
+      },
+      {
+        title: "তন্ময় (Tonmoy)",
+        author: "হুমায়ূন আহমেদ (Humayun Ahmed)",
+        category: "Bengali Literature",
+        status: "completed",
+        rating: 5,
+        notes: "মনোমুগ্ধকর সমসাময়িক বাংলা উপন্যাস ও গল্প সংকলন।",
+        read_url: "https://archive.org/details/books",
+        pdf_url: "https://archive.org/details/books",
+      },
+      {
+        title: "Clean Code",
+        author: "Robert C. Martin",
+        category: "Software Engineering",
+        status: "completed",
+        rating: 5,
+        notes: "A handbook of agile software craftsmanship and best programming practices.",
+        read_url: "https://archive.org/details/clean-code-9780136083238",
+        pdf_url: "https://archive.org/details/clean-code-9780136083238",
+      },
+      {
+        title: "Atomic Habits",
+        author: "James Clear",
+        category: "Self Improvement",
+        status: "completed",
+        rating: 5,
+        notes: "An easy and proven way to build good habits and break bad ones.",
+        read_url: "https://archive.org/details/atomic-habits-pdfdrive",
+        pdf_url: "https://archive.org/details/atomic-habits-pdfdrive",
+      },
+      {
+        title: "React Explained",
+        author: "Zac Gordon",
+        category: "Frontend Web Development",
+        status: "completed",
+        rating: 4,
+        notes: "Your step-by-step guide to learning React and building modern apps.",
+        read_url: "https://react.dev/learn",
+        pdf_url: "https://react.dev",
+      },
+      {
+        title: "JavaScript: The Good Parts",
+        author: "Douglas Crockford",
+        category: "Programming",
+        status: "completed",
+        rating: 4,
+        notes: "Uncovering the beauty and elegance of JavaScript as a powerful language.",
+        read_url: "https://archive.org/details/javascript-the-good-parts",
+        pdf_url: "https://archive.org/details/javascript-the-good-parts",
+      },
+    ];
+
+    for (const book of booksToInsert) {
+      const [existing] = await pool.query("SELECT id FROM books WHERE title = ?", [book.title]);
+      if (existing.length === 0) {
+        await pool.query(
+          `INSERT INTO books (title, author, category, status, rating, notes, read_url, pdf_url)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            book.title,
+            book.author,
+            book.category,
+            book.status,
+            book.rating,
+            book.notes,
+            book.read_url,
+            book.pdf_url,
+          ]
+        );
+        console.log(` Added book: ${book.title}`);
+      } else {
+        await pool.query(
+          `UPDATE books SET 
+            author = COALESCE(?, author),
+            category = COALESCE(?, category),
+            notes = COALESCE(?, notes),
+            read_url = COALESCE(?, read_url),
+            pdf_url = COALESCE(?, pdf_url)
+           WHERE id = ?`,
+          [book.author, book.category, book.notes, book.read_url, book.pdf_url, existing[0].id]
+        );
+      }
     }
 
-    // Seed default books if empty
-    const [bookRows] = await pool.query("SELECT COUNT(*) AS count FROM books");
-    if (bookRows[0].count === 0) {
-      await pool.query(`
-        INSERT INTO books (title, author, category, status, rating) VALUES
-        ('Clean Code', 'Robert C. Martin', 'Software Engineering', 'completed', 5),
-        ('Atomic Habits', 'James Clear', 'Self Improvement', 'completed', 5),
-        ('React Explained', 'Zac Gordon', 'Frontend Web Development', 'completed', 4),
-        ('JavaScript: The Good Parts', 'Douglas Crockford', 'Programming', 'completed', 4)
-      `);
-      console.log(" Seeded initial library books");
-    }
-
-    // Seed default certificates if empty
-    const [certRows] = await pool.query("SELECT COUNT(*) AS count FROM certificates");
-    if (certRows[0].count === 0) {
-      await pool.query(`
-        INSERT INTO certificates (title, issuer, issue_date, description) VALUES
-        ('React Frontend Certification', 'Coursera / Meta', '2025', 'Advanced modern React development, hooks, state management and component architecture.'),
-        ('PHP & MySQL Web Development', 'Udemy', '2024', 'Full-stack dynamic web app development with relational database architecture.'),
-        ('Java Programming Masterclass', 'Oracle Academy', '2024', 'Object-Oriented Programming, Data Structures, and Core Java development.')
-      `);
-      console.log(" Seeded initial certificates");
-    }
-
-    // Seed default tours if empty
-    const [tourRows] = await pool.query("SELECT COUNT(*) AS count FROM tours");
-    if (tourRows[0].count === 0) {
-      await pool.query(`
-        INSERT INTO tours (place, location, tour_date, image, description) VALUES
-        ('Cox\\'s Bazar', 'Chittagong Division, Bangladesh', 'January 2026', '/abu.jpeg', 'Enjoyed an unforgettable experience at the world\\'s longest natural sea beach.'),
-        ('Sajek Valley', 'Rangamati, Bangladesh', 'March 2025', '/hhp.jpg', 'A memorable journey through the lush green hills and rolling cloudscapes.'),
-        ('Sylhet', 'Sylhet Division, Bangladesh', 'May 2026', '/hop.jpg', 'Explored sprawling tea gardens, crystal clear rivers, and breathtaking natural beauty.')
-      `);
-      console.log(" Seeded initial tours");
-    }
-
-    // Seed default skills if empty
-    const [skillRows] = await pool.query("SELECT COUNT(*) AS count FROM skills");
-    if (skillRows[0].count === 0) {
-      await pool.query(`
-        INSERT INTO skills (name, category, proficiency) VALUES
-        ('HTML5', 'Frontend', 95),
-        ('CSS3 / Bootstrap', 'Frontend', 90),
-        ('React.js', 'Frontend', 85),
-        ('JavaScript (ES6+)', 'Languages', 85),
-        ('Node.js & Express', 'Backend', 80),
-        ('PHP', 'Backend', 75),
-        ('MySQL', 'Database', 80)
-      `);
-      console.log(" Seeded initial skills");
-    }
-
-    console.log(" Database tables checked and ready!");
+    console.log(" Database tables checked and all books ready!");
   } catch (error) {
     console.error("Database initialization error:", error.message);
   }
