@@ -9,30 +9,41 @@ function AboutPage() {
       period: "2024 – Present (Ongoing)",
       status: "In Progress",
       badge: "University",
+      role: "Class Representative (CR) 👑",
+      result: "Batch 42 (ID: 241-35-096)",
       description:
-        "Pursuing undergraduate degree focusing on Software Architecture, Web Engineering, Data Science & Machine Learning, System Analysis & Design (SE-231), and Relational Database Systems.",
-      keyCourses: ["Data Structures & Algorithms", "System Analysis & Design", "OOP in Java", "Database Systems", "Web Engineering"],
+        "Serving as the official Class Representative (CR) for the batch. Specializing in Full-Stack Web Development, Data Science & Machine Learning, System Analysis & Design (SE-231 Capstone), and IoT Solutions.",
+      keyCourses: [
+        "System Analysis & Design",
+        "Data Structures & Algorithms",
+        "OOP with Java",
+        "Relational Databases (MySQL)",
+        "Web Engineering",
+      ],
     },
     {
-      degree: "Higher Secondary Certificate (HSC)",
-      institution: "Science Division",
-      location: "Dhaka Board, Bangladesh",
+      degree: "Higher Secondary Certificate (HSC) — Science",
+      institution: "Holy Land School and College, Dinajpur",
+      location: "Dinajpur, Bangladesh",
       period: "Completed",
       status: "Completed",
       badge: "College / HSC",
+      role: "Class Captain 🎖️",
+      result: "Result: GPA A 🌟",
       description:
-        "Completed higher secondary education in Science with core emphasis on Mathematics, Physics, Chemistry, and Information & Communication Technology (ICT).",
+        "Served as Class Captain during college years. Graduated in Science Group with Grade A, focusing on Higher Mathematics, Physics, Chemistry, and ICT.",
       keyCourses: ["Higher Mathematics", "Physics", "Chemistry", "ICT"],
     },
     {
-      degree: "Secondary School Certificate (SSC)",
-      institution: "Science Division",
-      location: "Dhaka Board, Bangladesh",
+      degree: "Secondary School Certificate (SSC) — Science",
+      institution: "Cantonment Public School And College, Bir Uttam Shaheed Mahbub Senanibas",
+      location: "Kholahati, Dinajpur, Bangladesh",
       period: "Completed",
       status: "Completed",
-      badge: "High School / SSC",
+      badge: "School / SSC",
+      result: "Result: GPA A 🌟",
       description:
-        "Graduated with foundational excellence in Science and Mathematics, laying the early groundwork for engineering and computing passions.",
+        "Graduated in Science Group with Grade A from one of Bangladesh's premier cantonment-administered public institutions, instilling strong discipline, ethics, and mathematics.",
       keyCourses: ["General Science", "Higher Mathematics", "Physics", "Chemistry"],
     },
   ];
@@ -42,7 +53,7 @@ function AboutPage() {
       {/* Header */}
       <div className="text-center mb-5">
         <h1 className="fw-bold display-5">About Me</h1>
-        <p className="text-muted">Passionate Developer, Problem Solver & Lifelong Learner</p>
+        <p className="text-muted">Passionate Developer, Class Representative & Problem Solver</p>
         <hr className="w-25 mx-auto" />
       </div>
 
@@ -60,22 +71,26 @@ function AboutPage() {
           />
         </div>
         <div className="col-md-7">
-          <h2 className="fw-bold mb-3">Hi, I'm Abu Jakaria Hasu 👋</h2>
-          <p className="lead text-primary fw-semibold">
-            Full Stack Web Developer | React & Node.js | Aspiring Data Scientist
+          <h2 className="fw-bold mb-2">Hi, I'm Abu Jakaria Hasu 👋</h2>
+          <div className="d-flex flex-wrap gap-2 mb-3">
+            <span className="badge bg-primary px-3 py-2 fs-6">DIU Class Representative (CR)</span>
+            <span className="badge bg-secondary px-3 py-2 fs-6">Full Stack Developer</span>
+            <span className="badge bg-info text-dark px-3 py-2 fs-6">Aspiring Data Scientist</span>
+          </div>
+
+          <p className="text-secondary lh-lg mb-3">
+            I am a Software Engineering Student and <strong>Class Representative (CR)</strong> at <strong>Daffodil International University (DIU)</strong>. Passionate about building modern, scalable, high-performance web applications, IoT smart hardware, and exploring <strong>Data Science & Machine Learning</strong>.
           </p>
+
           <p className="text-secondary lh-lg">
-            I am a Software Engineering Student at <strong>Daffodil International University (DIU)</strong>. Passionate about building modern, scalable, high-performance, and responsive web applications while actively exploring <strong>Data Science and Machine Learning</strong>.
-          </p>
-          <p className="text-secondary lh-lg">
-            With solid expertise across full-stack technologies (React.js, Node.js, Express, PHP, MySQL) and a strong enthusiasm for data-driven algorithms and AI intelligence, I love solving complex technical challenges and turning ideas into impactful digital products.
+            Former <strong>Class Captain</strong> at Holy Land School and College, Dinajpur (GPA: A) and alumnus of <strong>Cantonment Public School And College, BUSMS</strong> (GPA: A). With leadership experience, collaborative teamwork, and strong technical foundations, I love driving innovative projects from concept to deployment.
           </p>
 
           <div className="d-flex flex-wrap gap-3 mt-4">
-            <Link to="/contact" className="btn btn-primary px-4 py-2">
+            <Link to="/contact" className="btn btn-primary px-4 py-2 fw-semibold">
               Get in Touch ✉️
             </Link>
-            <Link to="/projects" className="btn btn-outline-secondary px-4 py-2">
+            <Link to="/projects" className="btn btn-outline-dark px-4 py-2 fw-semibold">
               Browse Projects 🚀
             </Link>
           </div>
@@ -85,8 +100,8 @@ function AboutPage() {
       {/* Education Journey Section (SSC, HSC, University) */}
       <div className="my-5">
         <div className="text-center mb-4">
-          <h2 className="fw-bold">🎓 Education Journey</h2>
-          <p className="text-muted">Academic background from secondary school to university engineering</p>
+          <h2 className="fw-bold">🎓 Education Journey & Academic Background</h2>
+          <p className="text-muted">Institutions, academic excellence, and leadership roles</p>
         </div>
 
         <div className="row g-4">
@@ -98,13 +113,22 @@ function AboutPage() {
                     <span className="badge bg-primary-subtle text-primary border border-primary-subtle">
                       {edu.badge}
                     </span>
-                    <span className="badge bg-success-subtle text-success border border-success-subtle small">
-                      {edu.status}
+                    <span className="badge bg-success text-white fw-bold">
+                      {edu.result}
                     </span>
                   </div>
 
-                  <h4 className="fw-bold card-title mb-1 text-dark">{edu.degree}</h4>
-                  <h6 className="text-primary fw-semibold mb-1">{edu.institution}</h6>
+                  <h5 className="fw-bold card-title mb-1 text-dark">{edu.degree}</h5>
+                  <h6 className="text-primary fw-semibold mb-2">{edu.institution}</h6>
+                  
+                  {edu.role && (
+                    <div className="mb-2">
+                      <span className="badge bg-warning-subtle text-dark border border-warning fw-bold">
+                        👑 Role: {edu.role}
+                      </span>
+                    </div>
+                  )}
+
                   <p className="text-muted small mb-3">📍 {edu.location} • 📅 {edu.period}</p>
 
                   <p className="card-text text-secondary small lh-base mb-3">
@@ -133,9 +157,9 @@ function AboutPage() {
         <div className="col-md-4">
           <div className="card h-100 shadow-sm border-0 bg-light p-3">
             <div className="card-body">
-              <h5 className="fw-bold mb-2">🎓 DIU Scout Leader</h5>
-              <p className="text-muted mb-1 fw-semibold">Air Rover Scout Group</p>
-              <p className="text-secondary small">Completed 12th Air Scout Unit Leader Basic Course in Cox's Bazar</p>
+              <h5 className="fw-bold mb-2">👑 Leadership Roles</h5>
+              <p className="text-primary fw-semibold mb-1">CR at DIU • Class Captain at Holy Land</p>
+              <p className="text-secondary small">Air Rover Scout Leader (12th Air Scout Basic Course Certified)</p>
             </div>
           </div>
         </div>
@@ -143,9 +167,9 @@ function AboutPage() {
         <div className="col-md-4">
           <div className="card h-100 shadow-sm border-0 bg-light p-3">
             <div className="card-body">
-              <h5 className="fw-bold mb-2">💻 Full Stack & Data Science</h5>
-              <p className="text-muted mb-1 fw-semibold">Web Development & AI/ML</p>
-              <p className="text-secondary small">React SPAs, Node APIs, Relational DBs & Data Science Models</p>
+              <h5 className="fw-bold mb-2">💻 Full Stack & IoT</h5>
+              <p className="text-muted mb-1 fw-semibold">Web Development & Smart Systems</p>
+              <p className="text-secondary small">React SPAs, Node APIs, MySQL, IoT Sensors & Data Science Models</p>
             </div>
           </div>
         </div>
@@ -153,8 +177,8 @@ function AboutPage() {
         <div className="col-md-4">
           <div className="card h-100 shadow-sm border-0 bg-light p-3">
             <div className="card-body">
-              <h5 className="fw-bold mb-2">📍 Location & Languages</h5>
-              <p className="text-muted mb-1 fw-semibold">Dhaka, Bangladesh</p>
+              <h5 className="fw-bold mb-2">📍 Location & Origins</h5>
+              <p className="text-muted mb-1 fw-semibold">Dinajpur → Dhaka, Bangladesh</p>
               <p className="text-secondary small">Bengali (Native), English (Professional Working)</p>
             </div>
           </div>
