@@ -3,9 +3,17 @@ import { Link } from "react-router-dom";
 function HomePage() {
   const features = [
     {
+      title: "About & Education",
+      icon: "🎓",
+      desc: "Bio, education journey (SSC, HSC, DIU Software Engineering), and DIU Scout milestones.",
+      link: "/about",
+      badge: "Journey",
+      btnClass: "btn-secondary",
+    },
+    {
       title: "Projects",
       icon: "💻",
-      desc: "Explore web development projects, full-stack applications & repositories.",
+      desc: "Explore web development projects, Smart Waste Collection System & GitHub repositories.",
       link: "/projects",
       badge: "Full Stack",
       btnClass: "btn-primary",
@@ -21,7 +29,7 @@ function HomePage() {
     {
       title: "My Library",
       icon: "📚",
-      desc: "Curated collection of books on software engineering and development.",
+      desc: "Curated Bengali literature and software books with direct Read Online & PDF access.",
       link: "/library",
       badge: "Knowledge",
       btnClass: "btn-info text-white",
@@ -29,7 +37,7 @@ function HomePage() {
     {
       title: "Certificates",
       icon: "🏆",
-      desc: "Verified achievements, certifications, and academic milestones.",
+      desc: "Verified Google, CodeSignal, GoEdu & European Open University credentials.",
       link: "/certificates",
       badge: "Credentials",
       btnClass: "btn-warning text-dark",
@@ -37,18 +45,34 @@ function HomePage() {
     {
       title: "Travel Journey",
       icon: "🌍",
-      desc: "Memorable travel stories, scenic places, and adventures across Bangladesh.",
+      desc: "Memorable travel stories and pictures across Cox's Bazar, Sajek, and Sylhet.",
       link: "/tour",
-      badge: "Memories",
+      badge: "Adventures",
       btnClass: "btn-danger",
+    },
+    {
+      title: "Movies & Cinema",
+      icon: "🎬",
+      desc: "Favorite sci-fi masterpieces, inspiring cinema, and movie reflections.",
+      link: "/movies",
+      badge: "Entertainment",
+      btnClass: "btn-dark",
+    },
+    {
+      title: "Sports & Hobbies",
+      icon: "⚽",
+      desc: "FC Barcelona fandom, football, cricket, scouting drills, and photography.",
+      link: "/lifestyle",
+      badge: "Lifestyle",
+      btnClass: "btn-primary",
     },
     {
       title: "Contact Me",
       icon: "📬",
-      desc: "Get in touch for collaborations, projects, or just to say hello.",
+      desc: "Get in touch for collaborations, freelance projects, or just to say hello.",
       link: "/contact",
       badge: "Connect",
-      btnClass: "btn-dark",
+      btnClass: "btn-outline-dark",
     },
   ];
 
@@ -109,7 +133,7 @@ function HomePage() {
                       </span>
                     </div>
                     <h4 className="fw-bold card-title">{item.title}</h4>
-                    <p className="text-muted">{item.desc}</p>
+                    <p className="text-muted small">{item.desc}</p>
                   </div>
                   <div className="mt-3">
                     <Link

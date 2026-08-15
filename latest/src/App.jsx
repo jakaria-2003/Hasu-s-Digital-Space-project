@@ -10,6 +10,8 @@ import ProjectsPage from "./pages/ProjectsPage";
 import LibraryPage from "./pages/LibraryPage";
 import CertificatesPage from "./pages/CertificatesPage";
 import TourPage from "./pages/TourPage";
+import MoviesPage from "./pages/MoviesPage";
+import SportsHobbiesPage from "./pages/SportsHobbiesPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -26,6 +28,10 @@ function App() {
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/certificates" element={<CertificatesPage />} />
           <Route path="/tour" element={<TourPage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/lifestyle" element={<SportsHobbiesPage />} />
+          <Route path="/sports" element={<SportsHobbiesPage />} />
+          <Route path="/hobbies" element={<SportsHobbiesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
