@@ -1,21 +1,54 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../config/api.js";
 
+const DEFAULT_TOURS = [
+  {
+    id: 1,
+    place: "Cox's Bazar",
+    location: "Chittagong Division, Bangladesh",
+    tour_date: "January 2026",
+    image: "/abu.jpeg",
+    description:
+      "Riding ATV beach-buggies along the world's longest natural sea beach, enjoying the golden sunsets and ocean waves.",
+  },
+  {
+    id: 2,
+    place: "Sajek Valley",
+    location: "Rangamati, Bangladesh",
+    tour_date: "March 2025",
+    image: "/hhp.jpg",
+    description:
+      "A memorable journey through the lush green mountains, mist-covered peaks, and rolling cloudscapes of Sajek.",
+  },
+  {
+    id: 3,
+    place: "Sylhet",
+    location: "Sylhet Division, Bangladesh",
+    tour_date: "May 2026",
+    image: "/sylhet.jpg",
+    description:
+      "Exploring sprawling tea gardens, crystal-clear water lakes, and embracing traditional serene rural nature.",
+  },
+];
+
 function TourPage() {
-  const [tours, setTours] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [tours, setTours] = useState(DEFAULT_TOURS);
+  const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     fetch(`${API_URL}/api/tours`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Backend offline");
+        return res.json();
+      })
       .then((data) => {
-        setTours(data.data || []);
-        setLoading(false);
+        if (data.data && data.data.length > 0) {
+          setTours(data.data);
+        }
       })
       .catch((err) => {
-        console.error("Error loading tours:", err);
-        setLoading(false);
+        console.log("Using default travel catalog:", err.message);
       });
   }, []);
 
@@ -26,13 +59,6 @@ function TourPage() {
         <p className="text-muted">Exploring breathtaking landscapes, natural wonders, and culture across Bangladesh</p>
         <hr className="w-25 mx-auto" />
       </div>
-
-      {loading && (
-        <div className="text-center my-5">
-          <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-2 text-muted">Loading travel memories...</p>
-        </div>
-      )}
 
       <div className="row g-4">
         {tours.map((tour) => (

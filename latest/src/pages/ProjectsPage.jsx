@@ -1,22 +1,72 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../config/api.js";
 
+const DEFAULT_PROJECTS = [
+  {
+    id: 1,
+    title: "Smart Indoor Plant Pot",
+    description:
+      "A perfect blend of technology and nature: Developed an automated, efficient, and hassle-free plant care system using IoT and smart monitoring sensors. Team: Abu Jakaria Hasu, Rifat Hossain, Eyas, Sornal, and Mukta at Daffodil International University.",
+    technologies: "IoT | Sensors | Embedded Systems | Automation",
+    image: "/projects/smart-plant-pot.jpg",
+    github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+    live_link: "https://hasu-s-digital-space-project.vercel.app/projects",
+    featured: 1,
+  },
+  {
+    id: 2,
+    title: "Smart Waste Collection System",
+    description:
+      "IoT and cloud-driven smart waste management platform with real-time smart bin monitoring, dynamic vehicle route optimization, citizen complaint portal, and municipal analytics dashboard.",
+    technologies: "IoT | React.js | Node.js | MySQL | Cloud",
+    image: null,
+    github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+    live_link: "https://hasu-s-digital-space-project.vercel.app/projects",
+    featured: 1,
+  },
+  {
+    id: 3,
+    title: "Portfolio Website",
+    description:
+      "Personal dynamic digital space showcasing software projects, skill proficiency metrics, verified credentials, and travel stories.",
+    technologies: "React.js | Express | MySQL | Bootstrap",
+    image: null,
+    github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+    live_link: "https://hasu-s-digital-space-project.vercel.app",
+    featured: 1,
+  },
+  {
+    id: 4,
+    title: "Restaurant Management System",
+    description:
+      "Comprehensive order tracking, kitchen workflow dispatching, inventory control, and customer billing system.",
+    technologies: "React | Express | MySQL",
+    image: null,
+    github_link: "https://github.com/jakaria-2003/Hasu-s-Digital-Space-project",
+    live_link: "https://hasu-s-digital-space-project.vercel.app/projects",
+    featured: 0,
+  },
+];
+
 function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     fetch(`${API_URL}/api/projects`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Backend offline");
+        return res.json();
+      })
       .then((data) => {
-        setProjects(data.data || []);
-        setLoading(false);
+        if (data.data && data.data.length > 0) {
+          setProjects(data.data);
+        }
       })
       .catch((err) => {
-        console.error("Error fetching projects:", err);
-        setLoading(false);
+        console.log("Using default projects catalog:", err.message);
       });
   }, []);
 
@@ -62,14 +112,7 @@ function ProjectsPage() {
         </div>
       </div>
 
-      {loading && (
-        <div className="text-center my-5">
-          <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-2 text-muted">Loading projects from database...</p>
-        </div>
-      )}
-
-      {!loading && filteredProjects.length === 0 && (
+      {filteredProjects.length === 0 && (
         <div className="text-center my-5 text-muted">
           <h4>No projects found matching "{searchTerm}"</h4>
           <p>Try searching for something else.</p>

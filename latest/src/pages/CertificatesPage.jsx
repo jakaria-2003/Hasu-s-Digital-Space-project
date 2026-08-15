@@ -1,29 +1,86 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../config/api.js";
 
+const DEFAULT_CERTIFICATES = [
+  {
+    id: 1,
+    title: "The Bits and Bytes of Computer Networking",
+    issuer: "Google (Coursera)",
+    issue_date: "March 10, 2026",
+    credential_url: "https://coursera.org/verify/ORZRFG1G6RPQ",
+    image: "/certificates/google-networking.jpg",
+    description:
+      "Google Career Certificate in computer networking architecture, TCP/IP, UDP, DNS, routing, and cloud infrastructure.",
+  },
+  {
+    id: 2,
+    title: "Mastering Design Patterns with Java",
+    issuer: "CodeSignal",
+    issue_date: "April 11, 2026",
+    credential_url: "https://codesignal.com/learn/certificates/cmnhk7moo004bl804aqgvm1vo/course-paths/85",
+    image: "/certificates/codesignal-java.png",
+    description:
+      "Advanced Java software engineering, OOP design patterns, computer science fundamentals, and system architecture.",
+  },
+  {
+    id: 3,
+    title: "Leadership Qualities – Boss VS Leader",
+    issuer: "GoEdu (GEAC Accredited)",
+    issue_date: "June 09, 2026",
+    credential_url: "https://goedu.ac",
+    image: "/certificates/goedu-leadership.png",
+    description:
+      "Completed with distinction, certified in modern leadership principles, strategic decision making, and team management.",
+  },
+  {
+    id: 4,
+    title: "Unified Modeling Language (UML)",
+    issuer: "European Open University",
+    issue_date: "April 18, 2026",
+    credential_url: "https://europeanopenuniversity.com",
+    image: "/certificates/european-uml.png",
+    description:
+      "Professional Certificate Program in software system modeling, class diagrams, sequence diagrams, and architecture design.",
+  },
+  {
+    id: 5,
+    title: "12th Air Scout Unit Leader Basic Course",
+    issuer: "Bangladesh Scouts, Air Region",
+    issue_date: "January 19, 2025",
+    credential_url: "https://scouts.gov.bd",
+    image: "/certificates/bangladesh-air-scouts.png",
+    description:
+      "Represented Daffodil International University Air Rover Scout Group (Cert No: 0038/2025) in leadership & scout training in Cox's Bazar.",
+  },
+];
+
 function CertificatesPage() {
-  const [certificates, setCertificates] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [certificates, setCertificates] = useState(DEFAULT_CERTIFICATES);
+  const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     fetch(`${API_URL}/api/certificates`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Backend offline");
+        return res.json();
+      })
       .then((data) => {
-        setCertificates(data.data || []);
-        setLoading(false);
+        if (data.data && data.data.length > 0) {
+          setCertificates(data.data);
+        }
       })
       .catch((err) => {
-        console.error("Error loading certificates:", err);
-        setLoading(false);
+        console.log("Using default certificates catalog:", err.message);
       });
   }, []);
 
-  const getIssuerBadge = (issuer) => {
-    if (issuer.toLowerCase().includes("google")) return "bg-danger-subtle text-danger border border-danger-subtle";
-    if (issuer.toLowerCase().includes("codesignal")) return "bg-primary-subtle text-primary border border-primary-subtle";
-    if (issuer.toLowerCase().includes("goedu")) return "bg-warning-subtle text-warning-emphasis border border-warning-subtle";
-    if (issuer.toLowerCase().includes("scout")) return "bg-success-subtle text-success border border-success-subtle";
+  const getIssuerBadge = (issuer = "") => {
+    const iss = issuer.toLowerCase();
+    if (iss.includes("google")) return "bg-danger-subtle text-danger border border-danger-subtle";
+    if (iss.includes("codesignal")) return "bg-primary-subtle text-primary border border-primary-subtle";
+    if (iss.includes("goedu")) return "bg-warning-subtle text-warning-emphasis border border-warning-subtle";
+    if (iss.includes("scout")) return "bg-success-subtle text-success border border-success-subtle";
     return "bg-secondary-subtle text-secondary border border-secondary-subtle";
   };
 
@@ -36,13 +93,6 @@ function CertificatesPage() {
         </p>
         <hr className="w-25 mx-auto" />
       </div>
-
-      {loading && (
-        <div className="text-center my-5">
-          <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-2 text-muted">Loading credentials from database...</p>
-        </div>
-      )}
 
       <div className="row g-4">
         {certificates.map((cert) => (
@@ -115,7 +165,7 @@ function CertificatesPage() {
         <div
           className="modal fade show d-block"
           tabIndex="-1"
-          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+          style={{ backgroundColor: "rgba(0,0,0,0.85)", zIndex: 1055 }}
           onClick={() => setSelectedImage(null)}
         >
           <div className="modal-dialog modal-dialog-centered modal-lg">
