@@ -13,8 +13,11 @@ function Hero() {
         />
       </div>
       <h1 className="fw-bold display-5">Abu Jakaria Hasu</h1>
-      <p className="lead text-muted">
-        Full Stack Web Developer | React & Node.js Specialist
+      <p className="lead text-primary fw-semibold">
+        Full Stack Web Developer | React & Node.js | Aspiring Data Scientist
+      </p>
+      <p className="text-muted">
+        Software Engineering Student at Daffodil International University. Passionate about building modern, scalable, high-performance, and responsive web applications while exploring Data Science and Machine Learning.
       </p>
     </div>
   );

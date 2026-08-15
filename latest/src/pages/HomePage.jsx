@@ -70,11 +70,10 @@ function HomePage() {
           </div>
           <h1 className="display-4 fw-bold mb-2">Abu Jakaria Hasu</h1>
           <p className="lead text-primary fw-semibold mb-3">
-            Full Stack Web Developer | React & Node.js Specialist
+            Full Stack Web Developer | React & Node.js | Aspiring Data Scientist
           </p>
-          <p className="text-muted mx-auto" style={{ maxWidth: "650px" }}>
-            Software Engineering Student at Daffodil International University.
-            Building modern, high-performance, and responsive web applications.
+          <p className="text-muted mx-auto" style={{ maxWidth: "720px", fontSize: "1.1rem" }}>
+            Software Engineering Student at Daffodil International University. Passionate about building modern, scalable, high-performance, and responsive web applications while exploring Data Science and Machine Learning.
           </p>
           <div className="d-flex justify-content-center gap-3 mt-4">
             <Link to="/projects" className="btn btn-primary btn-lg px-4 shadow-sm">

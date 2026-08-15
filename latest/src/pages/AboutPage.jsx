@@ -23,15 +23,14 @@ function AboutPage() {
         </div>
         <div className="col-md-7">
           <h2 className="fw-bold mb-3">Hi, I'm Abu Jakaria Hasu 👋</h2>
-          <p className="lead text-primary fw-medium">
-            Software Engineering Student at Daffodil International University (DIU).
+          <p className="lead text-primary fw-semibold">
+            Full Stack Web Developer | React & Node.js | Aspiring Data Scientist
           </p>
           <p className="text-secondary lh-lg">
-            I am an enthusiastic web developer with a strong foundation in modern frontend and backend technologies.
-            I specialize in building performant, responsive web applications using <strong>React.js, Node.js, Express, PHP, and MySQL</strong>.
+            I am a Software Engineering Student at <strong>Daffodil International University (DIU)</strong>. Passionate about building modern, scalable, high-performance, and responsive web applications while actively exploring <strong>Data Science and Machine Learning</strong>.
           </p>
           <p className="text-secondary lh-lg">
-            My goal is to craft digital products that provide exceptional user experiences and solve real-world problems. When I am not coding, you will find me reading tech books, exploring scenic destinations across Bangladesh, or experimenting with new frameworks.
+            With solid expertise across full-stack technologies (React.js, Node.js, Express, PHP, MySQL) and a strong enthusiasm for data-driven algorithms and AI intelligence, I love solving complex technical challenges and turning ideas into impactful digital products.
           </p>
 
           <div className="d-flex flex-wrap gap-3 mt-4">
@@ -60,9 +59,9 @@ function AboutPage() {
         <div className="col-md-4">
           <div className="card h-100 shadow-sm border-0 bg-light p-3">
             <div className="card-body">
-              <h5 className="fw-bold mb-2">💻 Focus Areas</h5>
-              <p className="text-muted mb-1 fw-semibold">Full Stack Web Architecture</p>
-              <p className="text-secondary small">React SPAs, REST APIs, Relational Database Design</p>
+              <h5 className="fw-bold mb-2">💻 Full Stack & Data Science</h5>
+              <p className="text-muted mb-1 fw-semibold">Web Development & AI/ML</p>
+              <p className="text-secondary small">React SPAs, Node APIs, Relational DBs & Data Science Models</p>
             </div>
           </div>
         </div>
