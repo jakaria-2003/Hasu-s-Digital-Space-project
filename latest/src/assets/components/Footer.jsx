@@ -87,6 +87,9 @@ function Footer() {
               <Link to="/contact" className="text-secondary text-decoration-none hover-white">
                 Contact
               </Link>
+              <Link to="/messages" className="text-primary text-decoration-none hover-white fw-semibold">
+                Inbox 📬
+              </Link>
             </div>
           </div>
         </div>

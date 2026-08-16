@@ -13,6 +13,7 @@ import TourPage from "./pages/TourPage";
 import MoviesPage from "./pages/MoviesPage";
 import SportsHobbiesPage from "./pages/SportsHobbiesPage";
 import ContactPage from "./pages/ContactPage";
+import MessagesPage from "./pages/MessagesPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
           <Route path="/sports" element={<SportsHobbiesPage />} />
           <Route path="/hobbies" element={<SportsHobbiesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/inbox" element={<MessagesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

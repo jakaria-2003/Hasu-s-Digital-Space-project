@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { API_URL } from "../config/api.js";
 
 function ContactPage() {
@@ -62,7 +63,12 @@ function ContactPage() {
       <div className="text-center mb-5">
         <h1 className="fw-bold display-5">Get In Touch ✉️</h1>
         <p className="text-muted">Have a project idea, feedback, or want to collaborate? Send me a message!</p>
-        <hr className="w-25 mx-auto" />
+        <div className="d-flex justify-content-center gap-2 mt-2">
+          <Link to="/messages" className="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold">
+            📬 View Received Messages Inbox
+          </Link>
+        </div>
+        <hr className="w-25 mx-auto mt-3" />
       </div>
 
       <div className="row g-5 justify-content-center">
