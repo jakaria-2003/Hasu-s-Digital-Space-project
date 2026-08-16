@@ -81,6 +81,9 @@ function Footer() {
               <Link to="/lifestyle" className="text-secondary text-decoration-none hover-white">
                 Sports & Hobbies
               </Link>
+              <Link to="/clubs" className="text-secondary text-decoration-none hover-white">
+                Clubs
+              </Link>
               <Link to="/tour" className="text-secondary text-decoration-none hover-white">
                 Tour
               </Link>

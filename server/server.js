@@ -11,6 +11,7 @@ import certificateRoutes from "./routes/certificates.js";
 import contactRoutes from "./routes/contacts.js";
 import tourRoutes from "./routes/tours.js";
 import skillRoutes from "./routes/skills.js";
+import trackRoutes from "./routes/track.js";
 
 dotenv.config();
 
@@ -95,6 +96,7 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/tours", tourRoutes);
 app.use("/api/skills", skillRoutes);
+app.use("/api/track", trackRoutes);
 
 // 404 Handler for undefined routes
 app.use((req, res) => {

@@ -14,6 +14,7 @@ import CertificatesPage from "./pages/CertificatesPage";
 import TourPage from "./pages/TourPage";
 import MoviesPage from "./pages/MoviesPage";
 import SportsHobbiesPage from "./pages/SportsHobbiesPage";
+import ClubsPage from "./pages/ClubsPage";
 import ContactPage from "./pages/ContactPage";
 import MessagesPage from "./pages/MessagesPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -58,6 +59,8 @@ function App() {
           <Route path="/lifestyle" element={<SportsHobbiesPage />} />
           <Route path="/sports" element={<SportsHobbiesPage />} />
           <Route path="/hobbies" element={<SportsHobbiesPage />} />
+          <Route path="/clubs" element={<ClubsPage />} />
+          <Route path="/clubbing" element={<ClubsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/messages" element={<MessagesPage />} />
           <Route path="/inbox" element={<MessagesPage />} />

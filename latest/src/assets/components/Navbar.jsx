@@ -122,6 +122,17 @@ function Navbar() {
               </NavLink>
             </li>
 
+            <li className="nav-item">
+              <NavLink
+                to="/clubs"
+                className={({ isActive }) =>
+                  `nav-link px-2 ${isActive ? "active fw-bold text-white border-bottom border-primary border-2" : ""}`
+                }
+              >
+                Clubs 🤝
+              </NavLink>
+            </li>
+
             <li className="nav-item ms-lg-2 mt-2 mt-lg-0">
               <NavLink
                 to="/contact"

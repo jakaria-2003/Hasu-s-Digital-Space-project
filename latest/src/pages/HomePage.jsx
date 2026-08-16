@@ -45,10 +45,18 @@ function HomePage() {
     {
       title: "Travel Journey",
       icon: "🌍",
-      desc: "Memorable travel stories and pictures across Cox's Bazar, Sajek, and Sylhet.",
+      desc: "Memorable travel stories and pictures across Kuakata, Tangail, Sonargaon, Cox's Bazar, Sajek & Sylhet.",
       link: "/tour",
       badge: "Adventures",
       btnClass: "btn-danger",
+    },
+    {
+      title: "Clubs & Activities",
+      icon: "🤝",
+      desc: "Rover Mate at Air Scouts, Deputy Sports Secretary at SQATC, Executive Member at DSC, Bondhushava & DIUSEC.",
+      link: "/clubs",
+      badge: "Leadership",
+      btnClass: "btn-success",
     },
     {
       title: "Movies & Cinema",

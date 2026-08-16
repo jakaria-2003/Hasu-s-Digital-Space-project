@@ -160,6 +160,124 @@ function AboutPage() {
         </div>
       </div>
 
+      {/* Co-Curricular & Club Memberships Section */}
+      <div className="my-5">
+        <div className="text-center mb-4">
+          <h2 className="fw-bold">🤝 Club Memberships & Co-Curricular Activities</h2>
+          <p className="text-muted">Active involvement in leadership, tech societies, scouting, and cultural organizations</p>
+        </div>
+
+        <div className="row g-3">
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/air-rover-scout.png"
+                  alt="DIU Air Rover Scout"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#fff", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">DIU Air Rover Scout Group</h6>
+                  <span className="badge bg-success text-white">Rover Mate</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">12th Air Scout Basic Course certified, leading patrol crews, adventure camps & community service.</p>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/sqat.png"
+                  alt="SQATC"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#fff", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">SQAT Club (SQATC)</h6>
+                  <span className="badge bg-danger text-white">Deputy Sports Secretary</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">Executive sports leader organizing tournaments, health & fitness drives, and QA test workshops.</p>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/data-science.png"
+                  alt="Data Science Club"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#fff", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">Data Science Club (DSC)</h6>
+                  <span className="badge bg-primary text-white">Executive Member</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">Executive member coordinating Python, AI/ML masterclasses, and data analytics bootcamps.</p>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/sec.png"
+                  alt="DIUSEC"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#fff", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">DIU Software Engineering Club</h6>
+                  <span className="badge bg-info text-dark">General Member</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">Collaborating on coding hackathons, software design sessions, and developer workshops.</p>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/bondhushava.png"
+                  alt="Bondhushava DIU"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#fff", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">Daffodil Prothom Alo Bondhushava</h6>
+                  <span className="badge bg-warning text-dark">General Member</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">Engaging in humanitarian drives, blood donations, literature circles, and social causes.</p>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-lg-4">
+            <div className="card h-100 shadow-sm border-0 p-3 bg-light rounded-3 hover-shadow">
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <img
+                  src="/clubs/all-stars.png"
+                  alt="All Stars Daffodil"
+                  style={{ width: "48px", height: "48px", objectFit: "contain", borderRadius: "8px", background: "#000", padding: "3px", border: "1px solid #dee2e6" }}
+                />
+                <div>
+                  <h6 className="fw-bold mb-0 text-dark">All Stars Daffodil</h6>
+                  <span className="badge bg-secondary text-white">General Member</span>
+                </div>
+              </div>
+              <p className="text-secondary small mb-0">Fostering campus community spirit, athletic competitions, and student engagement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-3">
+          <Link to="/clubs" className="btn btn-outline-primary btn-sm px-4 py-2 fw-semibold rounded-pill">
+            View All Clubs & Leadership Details →
+          </Link>
+        </div>
+      </div>
+
       {/* Quick Bio Info Cards */}
       <div className="row g-4 mt-2">
         <div className="col-md-4">
